@@ -6,19 +6,25 @@
   <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
-  <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-lateral" alt="Logo Ragnarok"/></a>
-  <h2>Archivos indexados</h2>
-  <table border=1 cellpadding=5>
-    <tr><th>Nombre</th><th>Hash</th><th>Chunks</th></tr>
-    {% for row in rows %}
-      <tr>
-        <td>{{ row.source }}</td>
-        <td>{{ row.hash }}...</td>
-        <td>{{ row.chunks }}</td>
-      </tr>
-    {% endfor %}
-  </table>
-  <a href="/">← Volver</a>
+  <div class="logo-top">
+    <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo central de Ragnarok"/></a>
+  </div>
+  <div class="main-container">
+    <h2>Archivos indexados</h2>
+    <table border="1" cellpadding="5">
+      <tr><th>Nombre</th><th>Hash</th><th>Chunks</th></tr>
+      {% for row in rows %}
+        <tr>
+          <td>{{ row.source }}</td>
+          <td>{{ row.hash }}...</td>
+          <td>{{ row.chunks }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+    <div class="links">
+      <a href="/">← Volver</a>
+    </div>
+  </div>
 </body>
 </html>
 

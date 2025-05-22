@@ -6,25 +6,35 @@
   <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
-  <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-lateral" alt="Logo Ragnarok"/></a>
-  <h2>Resultados de Indexación</h2>
-  <table border=1 cellpadding=5>
-    <tr><th>Archivo</th><th>Estado</th><th>Detalle/Chunks</th></tr>
-    {% for r in results %}
+  <div class="logo-top">
+    <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo Ragnarok central"/>
+  </div>
+  <div class="main-container">
+    <h2>Resultados de Indexación</h2>
+    <table border="1" cellpadding="5">
       <tr>
-        <td>{{ r.filename }}</td>
-        <td>{{ r.status }}</td>
-        <td>
-          {% if r.status == 'indexed' %}
-            {{ r.chunks }}
-          {% else %}
-            {{ r.detail }}
-          {% endif %}
-        </td>
+        <th>Archivo</th>
+        <th>Estado</th>
+        <th>Detalle/Chunks</th>
       </tr>
-    {% endfor %}
-  </table>
-  <a href="/">← Volver</a>
+      {% for r in results %}
+        <tr>
+          <td>{{ r.filename }}</td>
+          <td>{{ r.status }}</td>
+          <td>
+            {% if r.status == 'indexed' %}
+              {{ r.chunks }}
+            {% else %}
+              {{ r.detail }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <div class="links">
+      <a href="/">← Volver</a>
+    </div>
+  </div>
 </body>
 </html>
 

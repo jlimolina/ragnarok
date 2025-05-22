@@ -6,28 +6,17 @@ body {
     min-height: 100vh;
 }
 
-.logo-lateral {
-    position: fixed;
-    top: 24px;
-    left: 200px;
-    width: 140px;
-    height: auto;
-    z-index: 100;
-    background: rgba(255,255,255,0.92);
-    border-radius: 14px;
-    padding: 10px 16px;
-    box-shadow: 2px 2px 10px #bbb;
-    transition: box-shadow 0.2s;
+/* Logo central arriba de todo */
+.logo-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 36px;
+    margin-bottom: 10px;
 }
 
-.logo-lateral:hover {
-    box-shadow: 0 0 24px #88d;
-}
-
-/* Logo central (en vez de h1) */
 .logo-central {
     display: block;
-    margin: 0 auto 1.5rem auto;
     width: 240px;
     max-width: 95vw;
     height: auto;
@@ -37,9 +26,13 @@ body {
     transition: box-shadow 0.2s;
 }
 
+.logo-central:hover {
+    box-shadow: 0 0 32px #6a59d9;
+}
+
 .main-container {
     max-width: 440px;
-    margin: 60px auto 0 auto;
+    margin: 20px auto 0 auto;
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 4px 24px #ececec;
@@ -48,7 +41,7 @@ body {
     text-align: center;
 }
 
-h1 {
+h1, h2 {
     color: #234;
     font-size: 2.3rem;
     margin-bottom: 1.5rem;
@@ -98,6 +91,33 @@ button[type="submit"]:hover {
 }
 .links a:hover {
     color: #6a59d9;
+}
+
+/* --- Tabla bonita --- */
+table {
+    border-collapse: collapse;
+    margin: 0 auto 1.5rem auto;
+    width: 100%;
+    background: #f8f8fb;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 1.04rem;
+    box-shadow: 0 3px 14px #ececec;
+}
+th, td {
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+}
+th {
+    background: #e7e7fa;
+    color: #434370;
+    font-weight: 600;
+}
+td {
+    color: #313140;
+}
+tr:nth-child(even) {
+    background: #f4f7ff;
 }
 
 /* --- Colores y estilos para el chat --- */
@@ -152,9 +172,9 @@ button[type="submit"]:hover {
 
 /* Responsive para móvil */
 @media (max-width: 700px) {
-    .logo-lateral { left: 8px; top: 8px; width: 70px; padding: 4px; }
     .logo-central { width: 120px; }
     .main-container { max-width: 98vw; padding: 1.2rem 0.7rem; }
-    h1 { font-size: 1.25rem; }
+    h1, h2 { font-size: 1.25rem; }
+    table { font-size: 0.98rem; }
 }
 

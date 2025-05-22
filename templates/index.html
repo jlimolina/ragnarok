@@ -6,10 +6,10 @@
   <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
-  <!-- Logo lateral fijo -->
+  <div class="logo-top">
+    <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo central de Ragnarok"/>
+  </div>
   <div class="main-container">
-    <!-- Logo central grande en vez de h1 -->
-    <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo Ragnarok central"/>
     <form action="/upload" method="post" enctype="multipart/form-data" class="form-upload">
       <label for="files">Sube tus PDFs para RAGnarok:</label>
       <input type="file" name="files" id="files" accept="application/pdf" multiple required/>
