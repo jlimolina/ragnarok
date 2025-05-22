@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>{% block title %}RAGnarok{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="logo-top">
+    <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo Ragnarok central"/></a>
+  </div>
+  <nav class="menu-superior">
+    <a href="/search" class="menu-link">Chat</a>
+    <a href="/files" class="menu-link">Ver archivos</a>
+    <a href="/" class="menu-link">Subir archivos</a>
+    <form action="/backup" method="post" style="display:inline;">
+      <button type="submit" class="menu-link menu-btn">Crear backup</button>
+    </form>
+  </nav>
+  <div class="main-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
+

@@ -1,8 +1,9 @@
 import os
 import hashlib
 import uuid
+import io
 from fastapi import FastAPI, UploadFile, File, Form, Request, Response, Cookie
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
@@ -12,9 +13,12 @@ from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
 from markdown import markdown
 
-# IMPORTA extractores
+# Importa extractores
 from extractors.pdf import extract_text_from_pdf
 from extractors.docx import extract_text_from_docx
+
+# Importa lógica de backup
+from utils.backup import create_backup_zip, restore_backup_zip
 
 load_dotenv()
 EMBED_MODEL   = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
@@ -60,8 +64,9 @@ def get_ollama_models(selected_model=None):
 # -------- Vistas --------
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def home_redirect():
+    # Redirige directamente al chat (search)
+    return RedirectResponse(url="/search")
 
 @app.get("/files", response_class=HTMLResponse)
 async def list_files(request: Request):
@@ -80,6 +85,11 @@ async def list_files(request: Request):
         for h, v in files.items()
     ]
     return templates.TemplateResponse("files.html", {"request": request, "rows": rows})
+
+@app.get("/upload", response_class=HTMLResponse)
+async def upload_form(request: Request):
+    # Muestra el formulario para subir archivos
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/upload", response_class=HTMLResponse)
 async def upload(request: Request, files: list[UploadFile] = File(...)):
@@ -225,4 +235,32 @@ async def reset_chat(session_id: str = Cookie(default=None)):
     resp = RedirectResponse(url="/search")
     resp.set_cookie("session_id", str(uuid.uuid4()), max_age=60*60*24*7)
     return resp
+
+@app.post("/backup")
+async def backup_vectordb():
+    """
+    Descarga la base de datos vectorial y el historial de chat como ZIP.
+    """
+    mem_zip, backup_filename = create_backup_zip()
+    headers = {'Content-Disposition': f'attachment; filename="{backup_filename}"'}
+    return StreamingResponse(mem_zip, media_type='application/zip', headers=headers)
+
+# ---- Restaurar backup ----
+
+@app.get("/restore", response_class=HTMLResponse)
+async def restore_form(request: Request):
+    # Muestra el formulario para subir backup
+    return templates.TemplateResponse("restore.html", {"request": request, "msg": ""})
+
+@app.post("/restore", response_class=HTMLResponse)
+async def restore_upload(request: Request, backup_file: UploadFile = File(...)):
+    # Restaura el backup subido
+    msg = ""
+    try:
+        data = await backup_file.read()
+        restore_backup_zip(io.BytesIO(data))
+        msg = "Backup restaurado correctamente. Reinicia la aplicación para aplicar los cambios."
+    except Exception as e:
+        msg = f"Error al restaurar backup: {e}"
+    return templates.TemplateResponse("restore.html", {"request": request, "msg": msg})
 

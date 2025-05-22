@@ -9,16 +9,22 @@
   <div class="logo-top">
     <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo central de Ragnarok"/>
   </div>
+  <!-- Menú superior -->
+  <nav class="menu-superior">
+    <a href="/search" class="menu-link">Chat</a>
+    <a href="/files" class="menu-link">Ver archivos</a>
+    <a href="/upload" class="menu-link">Subir archivos</a>
+    <form action="/backup" method="post" style="display:inline; margin:0;">
+      <button type="submit" class="menu-btn">Crear backup</button>
+    </form>
+    <a href="/restore" class="menu-link menu-btn" style="background:#ffe083;color:#534000;">Restaurar backup</a>
+  </nav>
   <div class="main-container">
     <form action="/upload" method="post" enctype="multipart/form-data" class="form-upload">
       <label for="files">Sube tus PDFs para RAGnarok:</label>
       <input type="file" name="files" id="files" accept="application/pdf" multiple required/>
       <button type="submit">Procesar</button>
     </form>
-    <div class="links">
-      <a href="/files">Ver archivos indexados</a> |
-      <a href="/search">Chat RAGnarok</a>
-    </div>
   </div>
 </body>
 </html>

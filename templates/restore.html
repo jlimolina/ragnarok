@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Restaurar backup - RAGnarok</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="logo-top">
+    <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo central de Ragnarok"/></a>
+  </div>
+  <!-- Menú superior -->
+  <nav class="menu-superior">
+    <a href="/search" class="menu-link">Chat</a>
+    <a href="/files" class="menu-link">Ver archivos</a>
+    <a href="/upload" class="menu-link">Subir archivos</a>
+    <form action="/backup" method="post" style="display:inline; margin:0;">
+      <button type="submit" class="menu-btn">Crear backup</button>
+    </form>
+    <a href="/restore" class="menu-link menu-btn" style="background:#ffe083; color:#534000;">Restaurar backup</a>
+  </nav>
+  <div class="main-container">
+    <h2>Restaurar backup de VectorDB</h2>
+    <form action="/restore" method="post" enctype="multipart/form-data" style="margin-bottom:1.5em;">
+      <label for="backup_file">Selecciona el archivo ZIP de backup:</label>
+      <input type="file" name="backup_file" id="backup_file" accept=".zip" required/>
+      <button type="submit" class="menu-btn">Restaurar backup</button>
+    </form>
+    {% if msg %}
+      <div style="margin-top:1.3em; padding:1em; background:#ffe7b2; color:#534000; border-radius:12px;">
+        {{ msg }}
+      </div>
+    {% endif %}
+    <div class="links" style="margin-top: 2em;">
+      <a href="/">← Volver</a>
+    </div>
+  </div>
+</body>
+</html>
+

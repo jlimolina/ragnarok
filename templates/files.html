@@ -9,6 +9,16 @@
   <div class="logo-top">
     <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo central de Ragnarok"/></a>
   </div>
+  <!-- Menú superior -->
+  <nav class="menu-superior">
+    <a href="/search" class="menu-link">Chat</a>
+    <a href="/files" class="menu-link">Ver archivos</a>
+    <a href="/upload" class="menu-link">Subir archivos</a>
+    <form action="/backup" method="post" style="display:inline; margin:0;">
+      <button type="submit" class="menu-btn">Crear backup</button>
+    </form>
+    <a href="/restore" class="menu-link menu-btn" style="background:#ffe083;color:#534000;">Restaurar backup</a>
+  </nav>
   <div class="main-container">
     <h2>Archivos indexados</h2>
     <table border="1" cellpadding="5">

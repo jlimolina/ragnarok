@@ -9,6 +9,15 @@
   <div class="logo-top">
     <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo Ragnarok central"/>
   </div>
+  <!-- Menú superior -->
+  <nav class="menu-superior">
+    <a href="/search" class="menu-link">Chat</a>
+    <a href="/files" class="menu-link">Ver archivos</a>
+    <a href="/upload" class="menu-link">Subir archivos</a>
+    <form action="/backup" method="post" style="display:inline;">
+      <button type="submit" class="menu-btn">Crear backup</button>
+    </form>
+  </nav>
   <div class="main-container">
     <h2>Resultados de Indexación</h2>
     <table border="1" cellpadding="5">
@@ -32,7 +41,7 @@
       {% endfor %}
     </table>
     <div class="links">
-      <a href="/">← Volver</a>
+      <a href="/upload">← Volver</a>
     </div>
   </div>
 </body>
