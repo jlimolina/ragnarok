@@ -1,0 +1,160 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7fafc;
+    min-height: 100vh;
+}
+
+.logo-lateral {
+    position: fixed;
+    top: 24px;
+    left: 200px;
+    width: 140px;
+    height: auto;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    border-radius: 14px;
+    padding: 10px 16px;
+    box-shadow: 2px 2px 10px #bbb;
+    transition: box-shadow 0.2s;
+}
+
+.logo-lateral:hover {
+    box-shadow: 0 0 24px #88d;
+}
+
+/* Logo central (en vez de h1) */
+.logo-central {
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 240px;
+    max-width: 95vw;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px #e6e6e6;
+    background: rgba(255,255,255,0.98);
+    transition: box-shadow 0.2s;
+}
+
+.main-container {
+    max-width: 440px;
+    margin: 60px auto 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #ececec;
+    padding: 2.4rem 2rem 1.5rem 2rem;
+    min-height: 350px;
+    text-align: center;
+}
+
+h1 {
+    color: #234;
+    font-size: 2.3rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.form-upload label {
+    font-weight: 500;
+    color: #334;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 0.8rem auto 1.2rem auto;
+    font-size: 1rem;
+}
+
+button[type="submit"] {
+    background: #6a59d9;
+    color: #fff;
+    border: none;
+    padding: 0.7em 2em;
+    font-size: 1.12rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 1.1rem;
+}
+button[type="submit"]:hover {
+    background: #5340be;
+}
+
+.links {
+    margin-top: 1.2rem;
+    font-size: 1.04rem;
+}
+.links a {
+    color: #234;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.links a:hover {
+    color: #6a59d9;
+}
+
+/* --- Colores y estilos para el chat --- */
+.chat-history {
+    margin-bottom: 2em;
+    text-align: left;
+}
+
+.chat-user {
+    background: #e0f7fa;
+    margin-bottom: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #245d67;
+    box-shadow: 0 2px 6px #eaf7f9;
+}
+
+.chat-bot {
+    background: #fffde7;
+    margin-bottom: 14px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: #77602e;
+    box-shadow: 0 2px 6px #f9f6e7;
+}
+
+.form-chat input[type="text"] {
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1.06rem;
+    padding: 6px 10px;
+    border-radius: 7px;
+    border: 1px solid #dedede;
+}
+
+.form-chat select {
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1.03rem;
+    padding: 6px 10px;
+    border-radius: 7px;
+    border: 1px solid #dedede;
+}
+
+.sub {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #8b8b8b;
+    margin-left: 8px;
+}
+
+/* Responsive para móvil */
+@media (max-width: 700px) {
+    .logo-lateral { left: 8px; top: 8px; width: 70px; padding: 4px; }
+    .logo-central { width: 120px; }
+    .main-container { max-width: 98vw; padding: 1.2rem 0.7rem; }
+    h1 { font-size: 1.25rem; }
+}
+

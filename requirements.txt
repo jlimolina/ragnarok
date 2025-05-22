@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pdfplumber
+unidecode
+regex
+markdown
+langchain
+langchain-community
+langchain-ollama
+langchain-chroma
+chromadb
+python-dotenv
+aiosqlite
+jinja2

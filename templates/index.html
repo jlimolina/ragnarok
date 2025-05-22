@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>RAGnarok</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <!-- Logo lateral fijo -->
+  <div class="main-container">
+    <!-- Logo central grande en vez de h1 -->
+    <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo Ragnarok central"/>
+    <form action="/upload" method="post" enctype="multipart/form-data" class="form-upload">
+      <label for="files">Sube tus PDFs para RAGnarok:</label>
+      <input type="file" name="files" id="files" accept="application/pdf" multiple required/>
+      <button type="submit">Procesar</button>
+    </form>
+    <div class="links">
+      <a href="/files">Ver archivos indexados</a> |
+      <a href="/search">Chat RAGnarok</a>
+    </div>
+  </div>
+</body>
+</html>
+

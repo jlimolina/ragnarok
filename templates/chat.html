@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>RAGnarok - Chat</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="main-container">
+    <img src="/logo/ragnarok_logo.png" class="logo-central" alt="Logo Ragnarok central"/>
+    <h1>RAGnarok - Chat</h1>
+    <div class="chat-history">
+      {% for c in chat_history %}
+        <div class="chat-user"><b>Tú:</b> {{ c.q }}</div>
+        <div class="chat-bot"><b>RAGnarok:</b> {{ c.a_html | safe }}</div>
+      {% endfor %}
+    </div>
+    <form action="/search" method="post" class="form-chat">
+      <input type="text" name="query" placeholder="Escribe tu pregunta..." required autocomplete="off">
+      <label for="model">Modelo de Ollama:</label>
+      <select name="model" id="model">
+          {% for m in select_modelos %}
+            <option value="{{ m.nombre }}" {% if m.selected %}selected{% endif %}>{{ m.nombre }}</option>
+          {% endfor %}
+      </select>
+      <button type="submit">Preguntar</button>
+    </form>
+    <div class="links">
+      <a href="/">← Volver</a> | <a href="/reset_chat">Borrar Chat</a>
+    </div>
+  </div>
+</body>
+</html>
+

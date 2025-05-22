@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Resultados de Indexación - RAGnarok</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <a href="/"><img src="/logo/ragnarok_logo.png" class="logo-lateral" alt="Logo Ragnarok"/></a>
+  <h2>Resultados de Indexación</h2>
+  <table border=1 cellpadding=5>
+    <tr><th>Archivo</th><th>Estado</th><th>Detalle/Chunks</th></tr>
+    {% for r in results %}
+      <tr>
+        <td>{{ r.filename }}</td>
+        <td>{{ r.status }}</td>
+        <td>
+          {% if r.status == 'indexed' %}
+            {{ r.chunks }}
+          {% else %}
+            {{ r.detail }}
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  <a href="/">← Volver</a>
+</body>
+</html>
+

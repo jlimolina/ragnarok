@@ -1,0 +1,24 @@
+# Ignorar entornos virtuales de Python
+.venv/
+venv/
+env/
+
+# Ignorar archivos temporales del sistema
+*.pyc
+__pycache__/
+*.swp
+*~
+
+# Ignorar archivos de bases de datos y cachés locales
+*.db
+*.sqlite3
+*.log
+chat_history.db
+
+# Ignorar archivos subidos y estáticos temporales (añade aquí si subes archivos temporalmente)
+uploads/
+*.tmp
+
+# Ignorar archivos de configuración locales
+.env
+
