@@ -1,5 +1,4 @@
 import os
-import io
 import hashlib
 import uuid
 from fastapi import FastAPI, UploadFile, File, Form, Request, Response, Cookie
@@ -8,13 +7,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 
-import pdfplumber
-import unidecode
-import regex as re
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
 from markdown import markdown
+
+# IMPORTA extractores
+from extractors.pdf import extract_text_from_pdf
+from extractors.docx import extract_text_from_docx
 
 load_dotenv()
 EMBED_MODEL   = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
@@ -101,20 +101,14 @@ async def upload(request: Request, files: list[UploadFile] = File(...)):
                 file.file.seek(0)
                 continue
 
-            try:
-                with pdfplumber.open(io.BytesIO(data)) as pdf:
-                    raw = "\n".join(page.extract_text() or "" for page in pdf.pages)
-            except Exception as e:
-                raise ValueError(f"Error al leer PDF: {str(e)}")
-
-            if not raw.strip():
-                raise ValueError("PDF sin texto extraíble")
-
-            txt = unidecode.unidecode(raw)
-            txt = re.sub(r"[ \t]+", " ", txt)
-            txt = re.sub(r"\r\n|\r", "\n", txt)
-            lines = [l.strip() for l in txt.split("\n") if len(l.strip()) > 3]
-            normalized = "\n".join(lines)
+            # ---- EXTRACTOR SEGÚN EXTENSIÓN ----
+            ext = file.filename.lower().split('.')[-1]
+            if ext == 'pdf':
+                normalized = extract_text_from_pdf(data)
+            elif ext == 'docx':
+                normalized = extract_text_from_docx(data)
+            else:
+                raise ValueError("Tipo de archivo no soportado. Solo PDF y DOCX de momento.")
 
             splitter = RecursiveCharacterTextSplitter(
                 chunk_size=CHUNK_SIZE,

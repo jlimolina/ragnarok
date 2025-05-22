@@ -13,3 +13,4 @@ chromadb
 python-dotenv
 aiosqlite
 jinja2
+python-docx
