@@ -21,4 +21,4 @@ uploads/
 
 # Ignorar archivos de configuración locales
 .env
-
+vectordb/
