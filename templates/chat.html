@@ -35,6 +35,10 @@
             <option value="{{ m.nombre }}" {% if m.selected %}selected{% endif %}>{{ m.nombre }}</option>
           {% endfor %}
       </select>
+      <label style="margin-left:18px;">
+        <input type="checkbox" name="use_context" value="1" checked>
+        Usar contexto RAG (vectorDB)
+      </label>
       <button type="submit">Preguntar</button>
     </form>
     <div class="links">

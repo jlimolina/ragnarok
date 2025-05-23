@@ -176,6 +176,7 @@ async def search_answer(
     response: Response,
     query: str = Form(...),
     model: str = Form(OLLAMA_MODEL),
+    use_context: str = Form(None),
     session_id: str = Cookie(default=None)
 ):
     if not session_id:
@@ -184,11 +185,18 @@ async def search_answer(
     prompt_context = "\n\n".join(
         [f"Pregunta: {q}\nRespuesta: {a}" for q, a in history[-4:]]
     )
-    emb = OllamaEmbeddings(model=EMBED_MODEL)
-    vectordb = Chroma(persist_directory=PERSIST_DIR, embedding_function=emb)
-    docs = vectordb.similarity_search(query, k=5)
-    context = "\n\n".join([doc.page_content for doc in docs])
-    context = context[:3000]
+
+    # Determina si se debe usar el contexto RAG (vectorDB)
+    usar_rag = use_context == "1" or use_context == "on"
+
+    if usar_rag:
+        emb = OllamaEmbeddings(model=EMBED_MODEL)
+        vectordb = Chroma(persist_directory=PERSIST_DIR, embedding_function=emb)
+        docs = vectordb.similarity_search(query, k=5)
+        context = "\n\n".join([doc.page_content for doc in docs])
+        context = context[:3000]
+    else:
+        context = ""
 
     prompt = f"""Eres un asistente RAG. Usa SOLO el contexto proporcionado.
 ---
